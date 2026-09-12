@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TCGdex — Catálogo de Cartas</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <h1>TCGdex <span>Catálogo de Cartas</span></h1>
+  <label class="lang">
+    Idioma
+    <select id="lang">
+      <option value="pt" selected>Português (BR)</option>
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="es">Español</option>
+      <option value="it">Italiano</option>
+      <option value="de">Deutsch</option>
+    </select>
+  </label>
+</header>
+
+<main>
+  <form id="filters" class="filters">
+    <fieldset>
+      <legend>Texto</legend>
+      <label>Nome <input type="text" name="name" placeholder="ex.: Pikachu"></label>
+      <label>ID da carta <input type="text" name="id" placeholder="ex.: sv08-028"></label>
+      <label>Nº no set <input type="text" name="localId" placeholder="ex.: 028"></label>
+      <label>Ilustrador <input type="text" name="illustrator" placeholder="ex.: Aliya Chen"></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Classificação</legend>
+      <label>Categoria <select name="category" data-enum="categories"><option value="">Todas</option></select></label>
+      <label>Tipo <select name="types" data-enum="types"><option value="">Todos</option></select></label>
+      <label>Raridade <select name="rarity" data-enum="rarities"><option value="">Todas</option></select></label>
+      <label>Estágio <select name="stage" data-enum="stages"><option value="">Todos</option></select></label>
+      <label>Sufixo <select name="suffix" data-enum="suffixes"><option value="">Todos</option></select></label>
+      <label>Tipo de treinador <select name="trainerType" data-enum="trainer-types"><option value="">Todos</option></select></label>
+      <label>Tipo de energia <select name="energyType" data-enum="energy-types"><option value="">Todos</option></select></label>
+      <label>Marca de regulação <select name="regulationMark" data-enum="regulation-marks"><option value="">Todas</option></select></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Coleção</legend>
+      <label>Série <span class="hint">(Ctrl/Shift para várias)</span>
+        <select id="serie" class="multi" multiple size="6"></select>
+      </label>
+      <label>Set <span class="hint">(Ctrl/Shift para vários)</span>
+        <select id="set" class="multi" multiple size="8"></select>
+      </label>
+      <button type="button" id="clearSets" class="ghost small">Limpar série/set</button>
+      <label>Pokédex nacional <input type="number" name="dexId" min="1" placeholder="ex.: 25"></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Numéricos</legend>
+      <label>HP mín. <input type="number" name="hpMin" min="0" step="10"></label>
+      <label>HP máx. <input type="number" name="hpMax" min="0" step="10"></label>
+      <label>Recuo máx. <input type="number" name="retreatMax" min="0" max="5"></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>Ordenação e paginação</legend>
+      <label>Ordenar por
+        <select name="sortField">
+          <option value="">Padrão (lançamento)</option>
+          <option value="name">Nome</option>
+          <option value="id">ID</option>
+          <option value="localId">Nº no set</option>
+        </select>
+      </label>
+      <label>Ordem
+        <select name="sortOrder">
+          <option value="ASC">Crescente</option>
+          <option value="DESC">Decrescente</option>
+        </select>
+      </label>
+      <label>Por página
+        <select name="perPage">
+          <option>24</option><option selected>48</option><option>96</option><option>200</option>
+        </select>
+      </label>
+      <label class="check"><input type="checkbox" name="onlyImages"> Apenas cartas com imagem</label>
+    </fieldset>
+
+    <div class="actions">
+      <button type="submit">Buscar</button>
+      <button type="button" id="reset" class="ghost">Limpar</button>
+    </div>
+  </form>
+
+  <section class="results">
+    <div class="statusbar">
+      <span id="status">Carregando…</span>
+      <span class="pager">
+        <button type="button" id="prev" disabled>‹ Anterior</button>
+        <span id="pageLabel">Página 1</span>
+        <button type="button" id="next" disabled>Próxima ›</button>
+      </span>
+    </div>
+    <div id="grid" class="grid"></div>
+  </section>
+</main>
+
+<div id="modal" class="modal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true">
+    <button type="button" id="modalClose" class="close" aria-label="Fechar">×</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
