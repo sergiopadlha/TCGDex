@@ -48,6 +48,7 @@ As opções dos selects são carregadas dos endpoints de enum da própria API
   o formato com pipe (`hp=gte:100|lte:150`) retorna vazio.
 - **Sem total de resultados**: a resposta não traz cabeçalho de contagem, então o
   botão "Próxima" é habilitado quando a página veio cheia.
-- **Ordenação** só é confiável por campos presentes no `CardBrief` (`name`, `id`, `localId`);
-  por isso as demais opções não foram expostas.
+- **Ordenação** só é confiável por `name`, `id`, `localId` e `dexId` (nº da Pokédex);
+  outros campos, como `hp`, são aceitos pela API mas devolvem resultado fora de ordem,
+  por isso não foram expostos.
 - O filtro "apenas cartas com imagem" é aplicado no cliente (a API não expõe esse filtro).
